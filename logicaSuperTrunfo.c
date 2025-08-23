@@ -24,7 +24,8 @@ int main() {
     char tecla;
     float densidade1, densidade2;
     float superpoder1, superpoder2;
-    int comparar;
+    int escolha1, escolha2;
+    float soma1 = 0, soma2 = 0;
 
     // "Menu" do primeiro cadastro
 
@@ -182,15 +183,13 @@ int main() {
       printf(" \n");
       printf(" \n");
 
-   // Comparação de cartas
-   // Menu de seleção
- 
+   // Menu de seleção 1
    //(1=População, 2=Área, 3=PIB, 4=Densidade Populacional, 5=Pontos turísticos, 6=PIB per capita, 7=Super Poder)
 
     printf("======== Comparação das Cartas ========\n");
     printf("---------------------------------------\n");
     printf("%s x %s \n", cidade1, cidade2);
-    printf("\nEscolha o aspecto que deseja comparar: \n");
+    printf("\nEscolha o primeiro aspecto que deseja comparar: \n");
     printf("1. População\n");
     printf("2. Área\n");
     printf("3. PIB\n");
@@ -199,7 +198,7 @@ int main() {
     printf("6. PIB per Capita\n");
     printf("7. Super Poder\n");
     printf("---> ");
-    scanf("%d", &comparar);
+    scanf("%d", &escolha1);
 
     // "Limpar" a tela)
 
@@ -207,16 +206,63 @@ int main() {
       printf(" \n");
       printf(" \n");
 
+    //Menu de seleção 2
+
+    printf("======== Comparação das Cartas ========\n");
+    printf("---------------------------------------\n");
+    printf("%s x %s \n", cidade1, cidade2);
+    printf("\nEscolha o segundo aspecto que deseja comparar: \n");
+    if(escolha1 != 1)
+    {
+      printf("1. População\n");
+    }
+    if(escolha1 != 2){
+      printf("2. Área\n");
+    }
+    if(escolha1 != 3){
+      printf("3. PIB\n");
+    }
+    if(escolha1 != 4){
+      printf("4. Densidade Populacional\n");
+    }
+    if(escolha1 != 5){
+      printf("5. Pontos Turísticos\n");
+    }
+    if(escolha1 != 6){
+      printf("6. PIB per Capita\n");
+    }
+    if(escolha1 != 7){
+      printf("7. Super Poder\n");
+    }
+    printf("---> ");
+    scanf("%d", &escolha2);
+
+    if (escolha2 == escolha1){
+      printf("*** ESCOLHA INVÁLIDA! Tente novamente. ***\n");
+      return 0; //Finaliza o programa caso seja inválido
+    }
+
+    // "Limpar" a tela)
+
+      printf(" \n"); 
+      printf(" \n");
+      printf(" \n");
+
+    // Comparação de cartas 1
 
     printf("======== Comparação das Cartas ========\n");
     printf("---------------------------------------\n");
     printf("%s x %s \n", cidade1, cidade2);
 
-   switch (comparar){
+    printf("\n*** PRIMEIRO ATRIBUTO: \n");
+
+   switch (escolha1){
     case 1:
     printf("Atributo: População\n");
     printf("Carta 1 - %s: [%lu Hab] \n", cidade1, populacao1);
     printf("Carta 2 - %s: [%lu Hab]\n", cidade2, populacao2);
+    soma1 += populacao1;
+    soma2 += populacao2;
     
       if (populacao1 > populacao2){
         printf ("A carta %s venceu!\n", cidade1);
@@ -224,11 +270,13 @@ int main() {
       } else if (populacao1 < populacao2) {
         printf ("A carta %s venceu!\n", cidade2);
       } else {
-        printf ("Empate!");
+        printf ("Empate!\n");
       }
     break;
     case 2:
-
+    soma1 += area1;
+    soma2 += area2;
+    
     printf("Atributo: Área\n");
     printf("Carta 1 - %s: [%.2f Km²]\n", cidade1, area1);
     printf("Carta 2 - %s: [%.2f Km²]\n", cidade2, area2);
@@ -239,10 +287,12 @@ int main() {
       } else if (area1 < area2) {
         printf ("A carta %s venceu!\n", cidade2);
       } else {
-        printf ("Empate!");
+        printf ("Empate!\n");
       }
    break;
    case 3:
+   soma1 += PIB1;
+   soma2 += PIB2;
 
     printf("Atributo: PIB\n");
     printf("Carta 1 - %s: [%.2f Bi]\n", cidade1, PIB1);
@@ -254,11 +304,13 @@ int main() {
       } else if (PIB1 < PIB2){
         printf ("A carta %s venceu!\n", cidade2);
       } else {
-        printf("Empate!");
+        printf("Empate!\n");
       }
    break;
    case 4:
-
+   soma1 += densidade1;
+   soma2 += densidade2;
+  
     printf("Atributo: Densidade Populacional\n");
     printf("Carta 1 - %s: [%.2f Hab/km²]\n", cidade1, densidade1);
     printf("Carta 2 - %s: [%.2f Hab/km²]\n", cidade2, densidade2);
@@ -269,10 +321,12 @@ int main() {
       } else if (densidade1 > densidade2){
         printf ("A carta %s venceu!\n", cidade2);
       } else {
-        printf("Empate!");
+        printf("Empate!\n");
       }
    break;
    case 5:
+   soma1 += turistico1;
+   soma2 += turistico2;
 
     printf("Atributo: Pontos Turísticos\n");
     printf("Carta 1 - %s: [%d Pontos Turísticos]\n", cidade1, turistico1);
@@ -284,10 +338,12 @@ int main() {
       } else if (turistico1 < turistico2) {
         printf ("A carta %s venceu!\n", cidade2);
       } else {
-        printf ("Empate!");
+        printf ("Empate!\n");
       }
    break;
    case 6:
+   soma1 += PIBcapita1;
+   soma2 += PIBcapita2;
 
     printf("Atributo: PIB per CAPITA\n");
     printf("Carta 1 - %s: [%.2f Reais]\n", cidade1, PIBcapita1);
@@ -299,10 +355,12 @@ int main() {
       } else if (PIBcapita1 < PIBcapita2){
         printf ("A carta %s venceu!\n", cidade2);
       } else {
-        printf ("Empate!");
+        printf ("Empate!\n");
       }
     break;
     case 7:
+    soma1 += superpoder1;
+    soma2 += superpoder2;
 
     printf("Atributo: Super Poder\n");
     printf("Carta 1 - %s: [%.2f]\n", cidade1, superpoder1);
@@ -314,11 +372,181 @@ int main() {
       } else if (superpoder1 < superpoder2){
         printf ("A carta %s venceu!\n", cidade2);
       } else {
-        printf ("Empate!");
+        printf ("Empate!\n");
       }
+      break;
    }
 
-    printf ("\n[Digite C para encerrar...]\n");
+   // Prosseguir
+    printf ("\n[Digite C para Continuar...]\n");
+    scanf (" %c", &tecla);
+    limpaBuffer();
+
+    // "Limpar" a tela)
+
+      printf(" \n"); 
+      printf(" \n");
+      printf(" \n");
+
+   // Comparação de cartas 2
+
+    printf("======== Comparação das Cartas ========\n");
+    printf("---------------------------------------\n");
+    printf("%s x %s \n", cidade1, cidade2);
+
+    printf("\n*** SEGUNDO ATRIBUTO: \n");
+
+   switch (escolha2){
+    case 1:
+    printf("Atributo: População\n");
+    printf("Carta 1 - %s: [%lu Hab] \n", cidade1, populacao1);
+    printf("Carta 2 - %s: [%lu Hab]\n", cidade2, populacao2);
+    soma1 += populacao1;
+    soma2 += populacao2;
+    
+      if (populacao1 > populacao2){
+        printf ("A carta %s venceu!\n", cidade1);
+
+      } else if (populacao1 < populacao2) {
+        printf ("A carta %s venceu!\n", cidade2);
+      } else {
+        printf ("Empate!\n");
+      }
+    break;
+    case 2:
+    soma1 += area1;
+    soma2 += area2;
+    
+    printf("Atributo: Área\n");
+    printf("Carta 1 - %s: [%.2f Km²]\n", cidade1, area1);
+    printf("Carta 2 - %s: [%.2f Km²]\n", cidade2, area2);
+    
+      if (area1 > area2){
+        printf ("A carta %s venceu!\n", cidade1);
+
+      } else if (area1 < area2) {
+        printf ("A carta %s venceu!\n", cidade2);
+      } else {
+        printf ("Empate!\n");
+      }
+   break;
+   case 3:
+   soma1 += PIB1;
+   soma2 += PIB2;
+
+    printf("Atributo: PIB\n");
+    printf("Carta 1 - %s: [%.2f Bi]\n", cidade1, PIB1);
+    printf("Carta 2 - %s: [%.2f Bi]\n", cidade2, PIB2);
+    
+      if (PIB1 > PIB2){
+        printf ("A carta %s venceu!\n", cidade1);
+
+      } else if (PIB1 < PIB2){
+        printf ("A carta %s venceu!\n", cidade2);
+      } else {
+        printf("Empate!\n");
+      }
+   break;
+   case 4:
+   soma1 += densidade1;
+   soma2 += densidade2;
+  
+    printf("Atributo: Densidade Populacional\n");
+    printf("Carta 1 - %s: [%.2f Hab/km²]\n", cidade1, densidade1);
+    printf("Carta 2 - %s: [%.2f Hab/km²]\n", cidade2, densidade2);
+    
+      if (densidade1 < densidade2){
+        printf ("A carta %s venceu!\n", cidade1);
+
+      } else if (densidade1 > densidade2){
+        printf ("A carta %s venceu!\n", cidade2);
+      } else {
+        printf("Empate!\n");
+      }
+   break;
+   case 5:
+   soma1 += turistico1;
+   soma2 += turistico2;
+
+    printf("Atributo: Pontos Turísticos\n");
+    printf("Carta 1 - %s: [%d Pontos Turísticos]\n", cidade1, turistico1);
+    printf("Carta 2 - %s: [%d Pontos Turísticos]\n", cidade2, turistico2);
+    
+      if (turistico1 > turistico2){
+        printf ("A carta %s venceu!\n", cidade1);
+
+      } else if (turistico1 < turistico2) {
+        printf ("A carta %s venceu!\n", cidade2);
+      } else {
+        printf ("Empate!\n");
+      }
+   break;
+   case 6:
+   soma1 += PIBcapita1;
+   soma2 += PIBcapita2;
+
+    printf("Atributo: PIB per CAPITA\n");
+    printf("Carta 1 - %s: [%.2f Reais]\n", cidade1, PIBcapita1);
+    printf("Carta 2 - %s: [%.2f Reais]\n", cidade2, PIBcapita2);
+    
+      if (PIBcapita1 > PIBcapita2){
+        printf ("A carta %s venceu!\n", cidade1);
+
+      } else if (PIBcapita1 < PIBcapita2){
+        printf ("A carta %s venceu!\n", cidade2);
+      } else {
+        printf ("Empate!\n");
+      }
+    break;
+    case 7:
+    soma1 += superpoder1;
+    soma2 += superpoder2;
+
+    printf("Atributo: Super Poder\n");
+    printf("Carta 1 - %s: [%.2f]\n", cidade1, superpoder1);
+    printf("Carta 2 - %s: [%.2f]\n", cidade2, superpoder2);
+    
+      if (superpoder1 > superpoder2){
+        printf ("A carta %s venceu!\n", cidade1);
+
+      } else if (superpoder1 < superpoder2){
+        printf ("A carta %s venceu!\n", cidade2);
+      } else {
+        printf ("Empate!\n");
+      }
+      break;
+   }
+
+   // Prosseguir
+    printf ("\n[Digite C para Continuar...]\n");
+    scanf (" %c", &tecla);
+    limpaBuffer();
+
+    // "Limpar" a tela)
+
+      printf(" \n"); 
+      printf(" \n");
+      printf(" \n");
+   
+   // Mostra soma final
+
+    printf("======== Comparação das Cartas ========\n");
+    printf("---------------------------------------\n");
+    printf("%s x %s \n", cidade1, cidade2);
+
+    printf("\n*** SOMA FINAL:\n");
+    printf("%s: %.1f\n", cidade1, soma1);
+    printf("%s: %.1f\n", cidade2, soma2);
+
+    if (soma1 > soma2){
+        printf("Vencedor: %s\n", cidade1);
+    }else if (soma2 > soma1){
+        printf("Vencedor: %s\n", cidade2);
+    }else{
+        printf("Empate!\n");
+    }
+
+    printf ("\n[Digite C para Encerrar...]\n");
     scanf (" %c", &tecla);
     limpaBuffer();
 
